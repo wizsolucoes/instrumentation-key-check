@@ -2,13 +2,22 @@
 
 import azure from 'azure-storage';
 
-interface AppInsightsCheckData {
+export interface AppInsightsCheckData {
   sharedKey: string;
   storageName: string;
 }
 
+export interface AppInsightsQueryResults {
+  Name: {
+    _: string;
+  };
+  InstrumentationKey: {
+    _: string;
+  };
+}
+
 class AppInsightsCheck {
-  private AzureTableService: azure.TableService;
+  public AzureTableService: azure.TableService;
 
   constructor(data: AppInsightsCheckData) {
     this.AzureTableService = azure.createTableService(
@@ -19,10 +28,10 @@ class AppInsightsCheck {
 
   checkAppInsightsInstrumentationKey(key: string): void {
     const query = new azure.TableQuery()
-      .select('InstrumentationKey')
-      .where('InstrumentationKey eq ?', key);
+      .select('InstrumentationKey', 'Name')
+      .where('InstrumentationKey eq ? && PartitionKey eq ?', key, '2020-11-19');
 
-    this.AzureTableService.queryEntities(
+    this.AzureTableService.queryEntities<AppInsightsQueryResults>(
       'appinsights',
       query,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,10 +39,16 @@ class AppInsightsCheck {
       (error, result) => {
         if (!error) {
           if (!result.entries.length) {
-            throw new Error('Instrumentation Key not found');
+            console.error('Error: Instrumentation Key not found');
+            process.exit(1);
           }
+
+          console.log(
+            `${result.entries[0].Name._}: Instrumentation Key is valid`,
+          );
         } else {
-          throw error;
+          console.error(`Error: ${error.message}`);
+          process.exit(1);
         }
       },
     );

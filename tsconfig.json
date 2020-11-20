@@ -18,5 +18,7 @@
   },
   "exclude": [
     "./prettier.config.js",
+    "./jest.config.js",
+    "./coverage"
   ]
 }

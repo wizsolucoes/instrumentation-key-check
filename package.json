@@ -12,7 +12,15 @@
     "build": "tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "homepage": "https://github.com/wizsolucoes/app-insights-analyzer#application-insights-analyzer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wizsolucoes/app-insights-analyzer"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
   "license": "MIT",
   "dependencies": {

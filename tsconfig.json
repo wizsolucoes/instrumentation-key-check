@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./src",
+    "rootDir": "./src",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": "./src",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": [
+    "./prettier.config.js",
+  ]
+}

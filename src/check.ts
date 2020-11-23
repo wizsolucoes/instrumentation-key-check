@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
 import azure from 'azure-storage';
+import moment from 'moment';
 
 export interface AppInsightsCheckData {
   sharedKey: string;
@@ -29,7 +29,11 @@ class AppInsightsCheck {
   checkAppInsightsInstrumentationKey(key: string): void {
     const query = new azure.TableQuery()
       .select('InstrumentationKey', 'Name')
-      .where('InstrumentationKey eq ? && PartitionKey eq ?', key, '2020-11-19');
+      .where(
+        'InstrumentationKey eq ? && PartitionKey eq ?',
+        key,
+        `${moment().format('YYYY-MM-DD')}`,
+      );
 
     this.AzureTableService.queryEntities<AppInsightsQueryResults>(
       'appinsights',

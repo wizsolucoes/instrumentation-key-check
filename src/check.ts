@@ -32,7 +32,7 @@ class AppInsightsCheck {
       .where(
         'InstrumentationKey eq ? && PartitionKey eq ?',
         key,
-        `${moment().format('yyyy-MM-DD')}`,
+        `${moment().format('YYYY-MM-DD')}`,
       );
 
     this.AzureTableService.queryEntities<AppInsightsQueryResults>(

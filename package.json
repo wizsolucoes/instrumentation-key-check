@@ -1,6 +1,6 @@
 {
   "name": "@wizsolucoes/instrumentation-key-check",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Ferramenta CLI para verificação da chava de instrumentação do AppInsights",
   "main": "./src/main.js",
   "bin": {

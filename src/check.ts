@@ -27,9 +27,15 @@ class AppInsightsCheck {
   }
 
   checkAppInsightsInstrumentationKey(key: string): void {
+    const date = new Date();
+
     const query = new azure.TableQuery()
       .select('InstrumentationKey', 'Name')
-      .where('InstrumentationKey eq ? && PartitionKey eq ?', key, '2020-11-19');
+      .where(
+        'InstrumentationKey eq ? && PartitionKey eq ?',
+        key,
+        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+      );
 
     this.AzureTableService.queryEntities<AppInsightsQueryResults>(
       'appinsights',

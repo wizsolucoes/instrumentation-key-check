@@ -35,6 +35,9 @@ class AppInsightsCheck {
         `${moment().format('YYYY-MM-DD')}`,
       );
 
+    console.log(`Data e Hora: ${moment().format('MMMM Do YYYY, h:mm:ss a')}`);
+    console.log(`Buscando chave: ${key}`);
+
     this.AzureTableService.queryEntities<AppInsightsQueryResults>(
       'appinsights',
       query,
@@ -43,12 +46,18 @@ class AppInsightsCheck {
       (error, result) => {
         if (!error) {
           if (!result.entries.length) {
-            console.error('Error: Instrumentation Key not found');
+            console.error('Error: Instrumentation Key não encontrada');
+            console.log(
+              'Siga as orientações do nosso knowledge base para encontrar a instrumentation key da sua aplicação:',
+            );
+            console.log(
+              'https://parcorretoradeseguros.sharepoint.com/sites/Gov.Met.Devz/SitePages/Chave-de-instrumenta%C3%A7%C3%A3o-Application-Insights---Onde-encontrar.aspx',
+            );
             process.exit(1);
           }
 
           console.log(
-            `${result.entries[0].Name._}: Instrumentation Key is valid`,
+            `${result.entries[0].Name._}: Instrumentation Key é valida`,
           );
         } else {
           console.error(`Error: ${error.message}`);

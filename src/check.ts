@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import azure from 'azure-storage';
-import moment from 'moment';
+import moment from 'moment-timezone';
+
 
 export interface AppInsightsCheckData {
   sharedKey: string;
@@ -32,10 +33,10 @@ class AppInsightsCheck {
       .where(
         'InstrumentationKey eq ? && PartitionKey eq ?',
         key,
-        `${moment().format('YYYY-MM-DD')}`,
+        `${moment().tz('America/Sao_Paulo').format('YYYY-MM-DD')}`,
       );
 
-    console.log(`Data e Hora: ${moment().format('MMMM Do YYYY, h:mm:ss a')}`);
+    console.log(`Data e Hora: ${moment().tz('America/Sao_Paulo').format('MMMM Do YYYY, h:mm:ss a')}`);
     console.log(`Buscando chave: ${key}`);
 
     this.AzureTableService.queryEntities<AppInsightsQueryResults>(

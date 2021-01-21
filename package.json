@@ -1,6 +1,6 @@
 {
   "name": "@wizsolucoes/instrumentation-key-check",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Ferramenta CLI para verificação da chava de instrumentação do AppInsights",
   "main": "./src/main.js",
   "bin": {
@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "azure-storage": "^2.10.3",
-    "moment": "^2.29.1"
+    "moment-timezone": "^0.5.32"
   },
   "devDependencies": {
     "@types/node": "^14.14.9",
